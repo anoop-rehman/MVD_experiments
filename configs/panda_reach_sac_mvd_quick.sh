@@ -1,0 +1,19 @@
+CUDA_VISIBLE_DEVICES=0 python3 train.py \
+	--algorithm sac \
+	--seed $1 \
+	--domain_name Panda \
+	--task_name PandaReachDense-v3 \
+	--exp_name panda_reach_sac_mvd_quick \
+	--image_reconstruction_loss True \
+	--num_train_steps 10000 \
+	--eval_freq 1000 \
+	--save_freq 10000 \
+	--num_eval_episodes 5 \
+	--action_repeat 1 \
+	--cameras first_person third_person_front third_person_side \
+	--frame_stack 1 \
+	--feature_dim 50 \
+	--eval_on_each_camera True \
+	--multi_view_disentanglement True \
+	--log_freq 100 \
+	--num_seed_steps 500
