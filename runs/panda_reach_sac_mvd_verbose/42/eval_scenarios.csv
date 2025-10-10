@@ -1,0 +1,3 @@
+episode,first_person_cam_episode_reward,first_person_cam_success_rate,step,third_person_front_cam_episode_reward,third_person_front_cam_success_rate,third_person_side_cam_episode_reward,third_person_side_cam_success_rate
+1.0,-11.268053148500622,0.0,0,-14.985635861754417,0.0,-10.32501998161897,0.0
+21.0,-10.710234282794408,0.0,1000,-8.439021784812212,0.0,-7.05577190858312,0.0
