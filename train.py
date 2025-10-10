@@ -250,7 +250,10 @@ def main(cfg):
     global workspace
     workspace = W(cfg)
     start_time = time.time()
-    workspace.run()
+    try:
+        workspace.run()
+    finally:
+        workspace.logger.close()
     print("total run time: ", time.time()-start_time)
 
 

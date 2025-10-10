@@ -125,7 +125,7 @@ class Logger(object):
         self._log_frequency = log_frequency
         self._action_repeat = action_repeat
         self._eval_on_each_scenario = eval_on_each_scenario
-        self._sw = None
+        self._sw = SummaryWriter(log_dir)
 
         self._train_mg = MetersGroup(os.path.join(log_dir, 'train'),
                                      formating=COMMON_TRAIN_FORMAT)
@@ -217,6 +217,11 @@ class Logger(object):
             return
         assert key.startswith('train') or key.startswith('eval')
         self._try_sw_log_histogram(key, histogram, step)
+    
+    def close(self):
+        """Close the SummaryWriter"""
+        if self._sw is not None:
+            self._sw.close()
 
     def dump(self, step, save=True, ty=None):
         step = self._update_step(step)
