@@ -6,7 +6,7 @@ CUDA_VISIBLE_DEVICES=0 python3 train.py \
 	--exp_name metaworld_soccer_drq_mvd_frequent_saves \
 	--num_train_steps 2000000 \
 	--eval_freq 20000 \
-	--save_freq 50000 \
+	--save_freq 2500 \
 	--num_eval_episodes 20 \
 	--action_repeat 2 \
 	--cameras first_person third_person \
