@@ -3,7 +3,7 @@ CUDA_VISIBLE_DEVICES=0 python3 train.py \
 	--seed $1 \
 	--domain_name MetaWorld \
 	--task_name soccer-v2 \
-	--exp_name metaworld_soccer_drq_mvd_frequent_saves \
+	--exp_name metaworld_soccer_drq_mvd_frequent_saves-2 \
 	--num_train_steps 2000000 \
 	--eval_freq 20000 \
 	--save_freq 2500 \
