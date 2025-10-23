@@ -46,7 +46,11 @@ class Workspace(object):
                              log_frequency=self.cfg.log_freq,
                              action_repeat=self.cfg.action_repeat,
                              eval_on_each_scenario=(self.cfg.eval_on_each_camera or len(self.cfg.cameras)==1),
-                             domain_name=self.cfg.domain_name)
+                             domain_name=self.cfg.domain_name,
+                             use_wandb=self.cfg.use_wandb,
+                             wandb_project=self.cfg.wandb_project,
+                             wandb_group=self.cfg.wandb_group,
+                             wandb_config=vars(self.cfg))
         utils.set_seed_everywhere(cfg.seed)
         self.device = torch.device(cfg.device)
 

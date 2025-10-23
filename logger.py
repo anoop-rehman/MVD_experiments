@@ -120,12 +120,27 @@ class Logger(object):
                  log_frequency=10000,
                  action_repeat=1,
                  eval_on_each_scenario=False,
-                 domain_name="Panda"):
+                 domain_name="Panda",
+                 use_wandb=False,
+                 wandb_project="mvd",
+                 wandb_group=None,
+                 wandb_config=None):
         self._log_dir = log_dir
         self._log_frequency = log_frequency
         self._action_repeat = action_repeat
         self._eval_on_each_scenario = eval_on_each_scenario
         self._sw = SummaryWriter(log_dir)
+        
+        # Initialize wandb if requested
+        self._use_wandb = use_wandb
+        if use_wandb:
+            wandb.init(
+                project=wandb_project,
+                group=wandb_group,
+                config=wandb_config,
+                name=f"{domain_name}_{log_dir.split('/')[-1]}",
+                dir=log_dir
+            )
 
         self._train_mg = MetersGroup(os.path.join(log_dir, 'train'),
                                      formating=COMMON_TRAIN_FORMAT)
@@ -178,6 +193,11 @@ class Logger(object):
         if type(value) == torch.Tensor:
             value = value.item()
         self._try_sw_log(key, value / n, step)
+        
+        # Log to wandb if enabled
+        if self._use_wandb:
+            wandb.log({key: value / n, "step": step})
+        
         if key.startswith('train'):
             mg = self._train_mg
         elif key.startswith('eval_scenarios'):
@@ -219,9 +239,11 @@ class Logger(object):
         self._try_sw_log_histogram(key, histogram, step)
     
     def close(self):
-        """Close the SummaryWriter"""
+        """Close the SummaryWriter and wandb"""
         if self._sw is not None:
             self._sw.close()
+        if self._use_wandb:
+            wandb.finish()
 
     def dump(self, step, save=True, ty=None):
         step = self._update_step(step)

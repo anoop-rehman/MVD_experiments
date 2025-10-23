@@ -38,6 +38,11 @@ def parse_args():
     parser.add_argument('--save_freq', default=1000000, type=int)
     parser.add_argument('--log_dir', default='runs', type=str)
     parser.add_argument('--save_video', default=False, action='store_true')
+    
+    # wandb
+    parser.add_argument('--use_wandb', default=False, action='store_true')
+    parser.add_argument('--wandb_project', default='mvd', type=str)
+    parser.add_argument('--wandb_group', default=None, type=str)
 
     # agent
     parser.add_argument('--discount', default=0.99, type=float)

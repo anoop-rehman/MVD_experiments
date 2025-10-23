@@ -1,0 +1,20 @@
+CUDA_VISIBLE_DEVICES=0 python3 train.py \
+	--algorithm drq \
+	--seed $1 \
+	--domain_name MetaWorld \
+	--task_name soccer-v2 \
+	--exp_name metaworld_soccer_drq_mvd_wandb \
+	--num_train_steps 2000000 \
+	--eval_freq 20000 \
+	--save_freq 50000 \
+	--num_eval_episodes 20 \
+	--action_repeat 2 \
+	--cameras first_person third_person \
+	--frame_stack 3 \
+	--feature_dim 50 \
+	--use_proprioceptive_state True \
+	--eval_on_each_camera True \
+	--multi_view_disentanglement True \
+	--use_wandb \
+	--wandb_project mvd \
+	--wandb_group metaworld_soccer_drq_mvd
